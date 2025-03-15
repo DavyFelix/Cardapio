@@ -10,7 +10,7 @@ import Animated, {
 
 import { ThemedText } from '@/components/ThemedText';
 
-export function HelloWave() {
+export function Settings() {
   const rotationAnimation = useSharedValue(0);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export function HelloWave() {
 
   return (
     <Animated.View style={animatedStyle}>
-      <ThemedText style={styles.text}>🍕</ThemedText>
+      <ThemedText style={styles.text}>⚙️</ThemedText>
     </Animated.View>
   );
 }
