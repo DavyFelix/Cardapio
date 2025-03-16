@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
 
 export default function LoginScreen() {
@@ -18,6 +18,14 @@ export default function LoginScreen() {
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
+      {/* Remover a barra de status */}
+      <StatusBar 
+        barStyle="light-content" 
+        hidden={false} 
+        translucent={true} 
+        backgroundColor="transparent" 
+      />
+
       <View style={styles.inner}>
         <Text style={styles.header}>Bem-vindo</Text>
 
