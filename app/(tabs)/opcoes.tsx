@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Button } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
@@ -23,9 +23,14 @@ export default function HomeScreen() {
       }>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Configurações</ThemedText>
-        {/* Passando a função de navegação para o evento onPress */}
-        <Button title="Ir para Login" onPress={navigateToLogin} />
       </ThemedView>
+
+      {/* Container para o botão */}
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={navigateToLogin}>
+          <Text style={styles.buttonText}>Ir para Login</Text>
+        </TouchableOpacity>
+      </View>
     </ParallaxScrollView>
   );
 }
@@ -35,6 +40,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
+    marginBottom: 30, // Espaçamento entre título e botão
   },
   reactLogo: {
     height: '100%',
@@ -42,5 +48,28 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
+  },
+  buttonContainer: {
+    alignItems: 'center', // Centralizar o botão
+    marginTop: 40, // Ajuste do espaçamento entre o título e o botão
+    marginHorizontal: 20, // Deixa o botão afastado das bordas
+  },
+  button: {
+    backgroundColor: '#007BFF', // Cor de fundo azul para o botão
+    borderRadius: 30, // Borda bem arredondada
+    paddingVertical: 15, // Aumenta a altura do botão
+    paddingHorizontal: 30, // Dá mais largura ao botão
+    width: '80%', // Controla o tamanho do botão
+    alignItems: 'center', // Centraliza o texto dentro do botão
+    elevation: 5, // Sombra para Android
+    shadowColor: '#000', // Sombra para iOS
+    shadowOffset: { width: 0, height: 4 }, // Sombra no iOS
+    shadowOpacity: 0.2, // Transparência da sombra
+    shadowRadius: 5, // Raio da sombra no iOS
+  },
+  buttonText: {
+    color: '#fff', // Cor do texto branco
+    fontSize: 18, // Tamanho do texto
+    fontWeight: 'bold', // Texto em negrito
   },
 });
