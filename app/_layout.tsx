@@ -30,8 +30,11 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
+        {/* Navegação para as telas principais com tabs */}
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
+        {/* Rota para a tela de login */}
+        <Stack.Screen name="login" />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>

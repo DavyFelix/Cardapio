@@ -37,7 +37,7 @@ export default function HomeScreen() {
       }
     >
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Bem-vindo ao Cardápio Refeito</ThemedText>
+        <ThemedText type="title">Bem-vindo ao Cardápio</ThemedText>
         <HelloWave />
       </ThemedView>
 
@@ -59,7 +59,7 @@ export default function HomeScreen() {
           renderItem={({ item }) => (
             <View style={styles.card}>
               <Text style={styles.cardTitle}>{item.nome || 'Nome indisponível'}</Text>
-              <Text style={styles.cardDescription}>{item.descricao || 'Descrição indisponível'}</Text>
+              <Text style={styles.cardDescription}>{item.tipo || 'Descrição indisponível'}</Text>
             </View>
           )}
         />
