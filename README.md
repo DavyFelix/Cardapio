@@ -1,25 +1,24 @@
-# Welcome to your Expo app 👋
+# 🎉 Cardápio Digital - O Futuro do Cardápio na Palma da Sua Mão! 🍔📱
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Bem-vindo ao **Cardápio Digital**! 🌮🥗 Este projeto incrível foi criado para transformar a maneira como você apresenta e interage com o cardápio do seu restaurante, lanchonete ou qualquer estabelecimento que ame servir comida deliciosa!
 
-## Get started
+Com este app, seus clientes vão poder navegar pelo cardápio de forma superinterativa e intuitiva, tudo no celular. Sem papéis, sem complicação! Só diversão e praticidade!
 
-1. Install dependencies
+## 🛠️ Tecnologias Usadas
 
-   ```bash
-   npm install
-   ```
+- **Expo**: Porque fazer apps nunca foi tão fácil e rápido! 🚀
+- **React Native**: A magia por trás dos apps móveis modernos.
+- **React Navigation**: Para garantir que a navegação entre as opções de prato seja tranquila, sem "engasgos".
 
-2. Start the app
+## 🚀 Como Começar
 
-   ```bash
-    npx expo start
-   ```
+### 1. Instalar as dependências
 
-In the output, you'll find options to open the app in a
+Antes de qualquer coisa, vamos preparar o ambiente. Abra o terminal e execute:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+```bash
+npm install
+
 - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
