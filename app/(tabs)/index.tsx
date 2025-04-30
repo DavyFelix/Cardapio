@@ -1,12 +1,12 @@
-// HomeScreen.tsx
 import { FlatList, View, Text, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { useEffect, useState } from 'react'; // Caminho corrigido para importação correta
-import { Produto } from 'D:/falcudade/CardapioReact/Cardapio/models/produtos';  // Certifique-se de que a importação está correta
-import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { Produto } from '@/models/produtos';
+import { db } from '@/firebase/firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
 export default function HomeScreen() {
   const [produtos, setProdutos] = useState<Produto[]>([]);
@@ -15,14 +15,30 @@ export default function HomeScreen() {
   useEffect(() => {
     async function fetchProdutos() {
       try {
-        const response = await axios.get('http://192.168.0.52:3000/api/lanches'); // Use o IP do seu servidor
-        setProdutos(response.data);
+        const querySnapshot = await getDocs(collection(db, 'produtos'));
+        const lista: Produto[] = [];
+
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          lista.push({
+            id: doc.id,
+            comida: data.comida,
+            descrição: data.descrição,
+            estoque: data.estoque,
+            preco: data.preco,
+            tipo: data.tipo,
+          });
+        });
+
+        setProdutos(lista);
+        console.log("Produtos carregados:", lista);
       } catch (error) {
-        console.error('Erro ao buscar produtos:', error);
+        console.error('Erro ao buscar produtos do Firestore:', error);
       } finally {
         setLoading(false);
       }
     }
+
     fetchProdutos();
   }, []);
 
@@ -46,25 +62,28 @@ export default function HomeScreen() {
       </ThemedView>
 
       <View style={{ flex: 1, padding: 16 }}>
-      <Text style={styles.title}>Cardápio</Text>
+        <Text style={styles.title}>Cardápio</Text>
 
-      {loading ? (
-        <ActivityIndicator size="large" color="#007bff" />
-      ) : produtos.length === 0 ? (
-        <Text style={styles.noData}>Nenhum produto disponível.</Text>
-      ) : (
-        <FlatList
-          data={produtos}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>{item.nome || 'Nome indisponível'}</Text>
-              <Text style={styles.cardDescription}>{item.tipo || 'Descrição indisponível'}</Text>
-            </View>
-          )}
-        />
-      )}
-    </View>
+        {loading ? (
+          <ActivityIndicator size="large" color="#007bff" />
+        ) : produtos.length === 0 ? (
+          <Text style={styles.noData}>Nenhum produto disponível.</Text>
+        ) : (
+          <FlatList
+            data={produtos}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>{item.comida}</Text>
+                <Text style={styles.cardDescription}>Tipo: {item.tipo}</Text>
+                <Text style={styles.cardDescription}>Descrição: {item.descrição}</Text>
+                <Text style={styles.cardDescription}>Preço: R$ {Number(item.preco).toFixed(2)}</Text>
+                <Text style={styles.cardDescription}>Estoque: {item.estoque}</Text>
+              </View>
+            )}
+          />
+        )}
+      </View>
     </ParallaxScrollView>
   );
 }
@@ -116,7 +135,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 16,
-    color: '#FFFFFF',
+    color: '#000000',
   },
   noData: {
     textAlign: 'center',
